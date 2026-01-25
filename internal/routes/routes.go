@@ -8,4 +8,5 @@ import (
 
 func RegisterRoutes(router *gin.Engine) {
 	router.GET("/ping", handlers.Ping)
+	router.POST("/user", handlers.CreateUser)
 }
