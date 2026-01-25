@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(router *gin.Engine) {
+func RegisterRoutes(router *gin.Engine, userHandler *handlers.UserHandler) {
 	router.GET("/ping", handlers.Ping)
-	router.POST("/user", handlers.CreateUser)
+	router.POST("/user", userHandler.CreateUser)
 }
