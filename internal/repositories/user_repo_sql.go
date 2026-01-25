@@ -9,6 +9,11 @@ type SqliteUserRepository struct{
 	DB *sql.DB
 }
 
+func NewSqliteUserRepository(db *sql.DB) *SqliteUserRepository{
+	return &SqliteUserRepository{DB: db}
+
+}
+
 
 func (r SqliteUserRepository) CreateUser(user *models.User) error{
 	query := "INSERT INTO users (name) VALUES(?) "
