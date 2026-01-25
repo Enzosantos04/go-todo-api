@@ -1,0 +1,34 @@
+package handlers
+
+import (
+	"gin-todo-listAPI/internal/models"
+	"gin-todo-listAPI/internal/services"
+
+	"github.com/gin-gonic/gin"
+)
+
+type UserHandler struct {
+	service *services.UserService
+}
+
+func NewUserHandler(service *services.UserService) *UserHandler {
+	return &UserHandler{service: service}
+}
+
+func (h *UserHandler) CreateUser(c *gin.Context){
+	var user models.User
+	if err := c.ShouldBindJSON(&user); err != nil{
+		c.JSON(400, gin.H{"erorr": "Invalid body"})
+		return
+	}
+
+	err := h.service.CreateUser(&user)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(201, user)
+	
+
+}
