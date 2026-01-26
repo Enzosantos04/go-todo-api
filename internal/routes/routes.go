@@ -10,4 +10,5 @@ func RegisterRoutes(router *gin.Engine, userHandler *handlers.UserHandler) {
 	router.GET("/ping", handlers.Ping)
 	router.POST("/user", userHandler.CreateUser)
 	router.GET("/user", userHandler.GetAllUser)
+	router.GET("/user/:id", userHandler.GetUserById)
 }
