@@ -51,7 +51,7 @@ func (h *UserHandler) GetUserById(c *gin.Context) {
 
     user, err := h.service.GetUserById(id)
     if err != nil {
-        c.JSON(400, gin.H{"error": "Usuário não encontrado", "id": id, "details": err.Error()})
+        c.JSON(400, gin.H{"error": "User not found", "id": id, "details": err.Error()})
         return
     }
 
