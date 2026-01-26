@@ -33,3 +33,37 @@ func (r SqliteUserRepository) CreateUser(user *models.User) error {
 }
 
 
+func (r *SqliteUserRepository) GetAllUser() ([]models.User, error){
+	query := "SELECT id, name FROM users"
+
+	rows, err := r.DB.Query(query)
+	if err != nil {
+		return nil, err
+		
+	}
+	defer rows.Close()
+
+	var users []models.User
+
+	for rows.Next(){
+		var user models.User 
+		if err := rows.Scan(&user.ID, &user.Name); err != nil{
+		return nil, err
+	}
+	users = append(users, user)
+	}
+
+	if err := rows.Err(); err != nil{
+		return nil, err
+
+	}
+
+
+
+	return users, nil
+
+	
+
+}
+
+
