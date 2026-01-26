@@ -67,3 +67,21 @@ func (r *SqliteUserRepository) GetAllUser() ([]models.User, error){
 }
 
 
+func (r *SqliteUserRepository) GetUserById(id string) (*models.User, error) {
+	var user models.User
+	query := "SELECT id, name FROM users WHERE id = ?"
+
+	err := r.DB.QueryRow(query, id).Scan(&user.ID, &user.Name)
+
+	if err == sql.ErrNoRows {
+		return nil, err
+	}
+
+	if err != nil{
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+
