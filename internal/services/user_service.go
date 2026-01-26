@@ -34,3 +34,13 @@ func (u *UserService) GetAllUser()([]models.User, error){
 	return users, nil
 }
 
+
+func (u *UserService) GetUserById(id string) (*models.User, error) {
+    user, err := u.repo.GetUserById(id)
+
+    if err != nil {
+        return nil, err
+    }
+
+    return user, nil
+}
