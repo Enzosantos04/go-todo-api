@@ -22,3 +22,15 @@ if(user.Name) ==""{
 return u.repo.CreateUser(user);
 }
 
+
+func (u *UserService) GetAllUser()([]models.User, error){
+
+	users, err := u.repo.GetAllUser()
+
+	if err != nil{
+		return nil, err
+	}
+
+	return users, nil
+}
+
