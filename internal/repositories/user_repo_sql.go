@@ -84,4 +84,11 @@ func (r *SqliteUserRepository) GetUserById(id string) (*models.User, error) {
 	return &user, nil
 }
 
+func (r *SqliteUserRepository) DeleteUserById(id string)  error{
+	query := "DELETE FROM users WHERE id = ?"
+	_, err := r.DB.Exec(query, id)
+
+	return err
+}
+
 
