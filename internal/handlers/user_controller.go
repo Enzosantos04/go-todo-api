@@ -44,3 +44,16 @@ func (h *UserHandler) GetAllUser(c *gin.Context){
 
 	c.JSON(200, users)
 }
+
+
+func (h *UserHandler) GetUserById(c *gin.Context) {
+    id := c.Param("id")
+
+    user, err := h.service.GetUserById(id)
+    if err != nil {
+        c.JSON(400, gin.H{"error": "Usuário não encontrado", "id": id, "details": err.Error()})
+        return
+    }
+
+    c.JSON(200, user)
+}
