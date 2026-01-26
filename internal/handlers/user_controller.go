@@ -32,3 +32,15 @@ func (h *UserHandler) CreateUser(c *gin.Context){
 	
 
 }
+
+
+func (h *UserHandler) GetAllUser(c *gin.Context){
+
+	users, err := h.service.GetAllUser()
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+    return
+	}
+
+	c.JSON(200, users)
+}
