@@ -92,3 +92,12 @@ func (r *SqliteUserRepository) DeleteUserById(id string)  error{
 }
 
 
+func(r *SqliteUserRepository) updateUserById(id string, Name string) error{
+	query := "UPDATE users SET name = ? WHERE id = ?"
+
+	_, err := r.DB.Exec(query)
+
+
+	return err
+}
+
