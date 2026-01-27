@@ -44,3 +44,14 @@ func (u *UserService) GetUserById(id string) (*models.User, error) {
 
     return user, nil
 }
+
+func (u *UserService) DeleteUserById(id string) error{
+
+	 err := u.repo.DeleteUserById(id)
+
+	if err != nil{
+		return  err
+	}
+
+	return  nil
+}
