@@ -3,6 +3,7 @@ package handlers
 import (
 	"gin-todo-listAPI/internal/models"
 	"gin-todo-listAPI/internal/services"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -56,4 +57,17 @@ func (h *UserHandler) GetUserById(c *gin.Context) {
     }
 
     c.JSON(200, user)
+}
+
+
+func (h *UserHandler) DeleteUserById(c *gin.Context){
+	id := c.Param("id")
+
+	 err := h.service.DeleteUserById(id)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "User not found", "id": id, "details": err.Error()})
+		
+	}
+
+	c.JSON(200, http.StatusOK)
 }
