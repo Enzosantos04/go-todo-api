@@ -93,7 +93,7 @@ func (r *SqliteUserRepository) DeleteUserById(id string)  error{
 }
 
 
-func(r *SqliteUserRepository) updateUserById(user *models.User) error{
+func(r *SqliteUserRepository) UpdateUserById(user *models.User) error{
 	query := "UPDATE users SET name = ? WHERE id = ?"
 
 	res, err := r.DB.Exec(query, user.Name, user.ID)
