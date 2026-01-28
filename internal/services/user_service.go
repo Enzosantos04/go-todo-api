@@ -16,7 +16,7 @@ func NewUserService(repo repositories.User) *UserService{
 }
 
 func (u *UserService) CreateUser(user *models.User) error{
-if(user.Name) ==""{
+if user.Name ==""{
 	return errors.New("Name field should not be empty")
 }
 return u.repo.CreateUser(user);
@@ -54,4 +54,19 @@ func (u *UserService) DeleteUserById(id string) error{
 	}
 
 	return  nil
+}
+
+
+func (u *UserService) UpdateUserById(id string, user *models.User) error {
+	if user.Name == "" {
+		return errors.New("Name field should not be empty")
+	}
+
+	err := u.repo.UpdateUserById(id, user)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
