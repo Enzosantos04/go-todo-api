@@ -8,4 +8,5 @@ type User interface{
 	CreateUser( user *models.User) error
     GetUserById(string) (*models.User, error)
 	DeleteUserById(string) error
+	updateUserById(string, string) error
 }
