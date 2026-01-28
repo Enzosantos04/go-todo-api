@@ -71,3 +71,21 @@ func (h *UserHandler) DeleteUserById(c *gin.Context){
 
 	c.JSON(200, http.StatusOK)
 }
+
+
+func (h *UserHandler) UpdateUserById(c *gin.Context){
+	id := c.Param("id")
+	var user models.User
+	if err := c.ShouldBindJSON(&user); err != nil{
+		c.JSON(400, gin.H{"error": "Invalid body"})
+		return
+	}
+
+	err := h.service.UpdateUserById(id, &user)
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"message": "User updated successfully"})
+}
