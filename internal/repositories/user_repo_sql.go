@@ -85,7 +85,7 @@ func (r *SqliteUserRepository) GetUserById(id string) (*models.User, error) {
 	return &user, nil
 }
 
-func (r *SqliteUserRepository) DeleteUserById(id string)  error{
+func (r *SqliteUserRepository) DeleteUserById(id string) error {
 	query := "DELETE FROM users WHERE id = ?"
 	_, err := r.DB.Exec(query, id)
 
@@ -93,24 +93,23 @@ func (r *SqliteUserRepository) DeleteUserById(id string)  error{
 }
 
 
-func(r *SqliteUserRepository) UpdateUserById(user *models.User) error{
+func (r *SqliteUserRepository) UpdateUserById(id string, user *models.User) error {
 	query := "UPDATE users SET name = ? WHERE id = ?"
 
-	res, err := r.DB.Exec(query, user.Name, user.ID)
+	res, err := r.DB.Exec(query, user.Name, id)
 
-	if err != nil{
+	if err != nil {
 		return err
 	}
 
 	rows, err := res.RowsAffected()
-	if err != nil{
+	if err != nil {
 		return err
 	}
-	if rows == 0{
+	if rows == 0 {
 		return errors.New("User not found")
 	}
 
-
-	return nil 
+	return nil
 }
 
