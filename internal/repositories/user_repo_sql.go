@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"database/sql"
+	"errors"
 	"gin-todo-listAPI/internal/models"
 )
 
@@ -92,12 +93,24 @@ func (r *SqliteUserRepository) DeleteUserById(id string)  error{
 }
 
 
-func(r *SqliteUserRepository) updateUserById(id string, Name string) error{
+func(r *SqliteUserRepository) updateUserById(user *models.User) error{
 	query := "UPDATE users SET name = ? WHERE id = ?"
 
-	_, err := r.DB.Exec(query)
+	res, err := r.DB.Exec(query, user.Name, user.ID)
+
+	if err != nil{
+		return err
+	}
+
+	rows, err := res.RowsAffected()
+	if err != nil{
+		return err
+	}
+	if rows == 0{
+		return errors.New("User not found")
+	}
 
 
-	return err
+	return nil 
 }
 
