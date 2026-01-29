@@ -13,4 +13,5 @@ func RegisterRoutes(router *gin.Engine, userHandler *handlers.UserHandler) {
 	router.GET("/user/:id", userHandler.GetUserById)
 	router.DELETE("/user/:id", userHandler.DeleteUserById)
 	router.PUT("/user/:id", userHandler.UpdateUserById)
+	router.POST("/task", taskHandler.CreateTask)
 }
