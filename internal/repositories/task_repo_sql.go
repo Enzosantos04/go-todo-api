@@ -37,7 +37,7 @@ func (r *SqliteTaskRepository) GetAllTasks() ([]models.Task, error) {
 
 
 func (r *SqliteTaskRepository) CreateTask(task *models.Task) error {
-	_, err := r.DB.Exec("INSERT INTO task (title, completed) VALUES (?, ?)", 
-	task.Title, task.Completed)
+	_, err := r.DB.Exec("INSERT INTO task (title, completed, user_id) VALUES (?, ?, ?)", 
+	task.Title, task.Completed, task.User_id)
 	return err
 }
