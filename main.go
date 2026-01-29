@@ -22,9 +22,12 @@ func main() {
     userService := services.NewUserService(userRepo)
     userHandler := handlers.NewUserHandler(userService)
 
+	taskRepo := repositories.NewSqliteTaskRepository(db)
+	taskService := services.NewTaskService(taskRepo)
+	taskHandler := handlers.NewTaskHandler(taskService)
 
 	router := gin.Default()
-	routes.RegisterRoutes(router, userHandler)
+	routes.RegisterRoutes(router, userHandler, taskHandler)
 	router.Run(":8080")
 }
 
