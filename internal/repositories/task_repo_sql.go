@@ -9,6 +9,10 @@ type SqliteTaskRepository struct {
 	DB *sql.DB
 }
 
+func NewSqliteTaskRepository(db *sql.DB) *SqliteTaskRepository{
+	return &SqliteTaskRepository{DB: db}
+}
+
 
 
 func (r *SqliteTaskRepository) GetAllTasks() ([]models.Task, error) {
